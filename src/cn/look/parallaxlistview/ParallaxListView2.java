@@ -114,12 +114,12 @@ public class ParallaxListView2 extends ListView {
 			int scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent) {
 		if (isTouchEvent) {
 			log("OverScrollBy:" + deltaY);
-			if (getFirstVisiblePosition() == 0 && mHeader != null) {// 顶部下拉
+			if (getFirstVisiblePosition() == 0 && mHeader != null && deltaY<0) {// 顶部下拉
 				if (mHeader.getHeight() < mHeaderHeight * SCALE) {
 					mLayoutParams.height = mHeader.getHeight() - deltaY / 2;
 					mHeader.setLayoutParams(mLayoutParams);
 				}
-			} else if (getLastVisiblePosition() == getAdapter().getCount() - 1) {// 底部上拉
+			} else if (getLastVisiblePosition() == getAdapter().getCount() - 1 && deltaY>0) {// 底部上拉
 				if (getPaddingBottom() < mPaddingBottom + DISTANCE) {
 					setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), getPaddingBottom() + deltaY);
 				}
